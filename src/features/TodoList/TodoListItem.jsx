@@ -7,6 +7,10 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const todoTitleInput = useRef(null);
 
   useEffect(() => {
+    setWorkingTitle(todo.title);
+  }, [todo]);
+
+  useEffect(() => {
     if (todoTitleInput.current && isEditing) {
       todoTitleInput.current.focus();
     }
