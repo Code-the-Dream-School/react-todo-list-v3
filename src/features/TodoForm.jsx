@@ -7,7 +7,7 @@ function TodoForm({ onAddTodo, isSaving }) {
   const todoTitleInput = useRef(null);
 
   useEffect(() => {
-    if (isSaving || workingTodo === '') {
+    if (workingTodo === '') {
       if (isButtonDisabled) {
         return;
       }
@@ -18,7 +18,7 @@ function TodoForm({ onAddTodo, isSaving }) {
       }
       setIsButtonDisabled(false);
     }
-  }, [isSaving, workingTodo, isButtonDisabled]);
+  }, [workingTodo, isButtonDisabled]);
 
   function handleAddTodo(event) {
     event.preventDefault();
