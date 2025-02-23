@@ -94,7 +94,7 @@ function App() {
 
   //optimistic - uses catch to revert
   const updateTodo = async (editedTodo) => {
-    const [originalTodo] = todoList.filter((todo) => todo.id === editedTodo.id);
+    const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
