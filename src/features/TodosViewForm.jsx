@@ -6,9 +6,9 @@ function TodosViewForm({
   sortField,
   setSortField,
 }) {
-  const preventRefresh = (e) => {
+  function preventRefresh(e) {
     e.preventDefault();
-  };
+  }
   return (
     <form onSubmit={preventRefresh}>
       <div>
