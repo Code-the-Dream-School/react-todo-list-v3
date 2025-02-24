@@ -37,7 +37,7 @@ function App() {
       };
       try {
         const resp = await fetch(
-          encodeUrl({ queryString, sortDirection, sortField }),
+          encodeUrl({ sortDirection, sortField, queryString }),
           options
         );
         if (!resp.ok) {
