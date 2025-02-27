@@ -1,0 +1,11 @@
+body {
+  font-family: sans-serif;
+  background-color: rgba(236, 247, 255, .5);
+}
+
+input,
+button,
+select {
+  border-radius: 3px;
+  padding: .25rem 1rem;
+}
