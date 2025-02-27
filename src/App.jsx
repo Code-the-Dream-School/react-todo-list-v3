@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import TodoList from './features/TodoList/TodoList';
 import TodoForm from './features/TodoForm';
 import TodosViewForm from './features/TodosViewForm';
+import styles from './App.module.css';
+import './App.css';
 
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
@@ -234,7 +236,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>Todo List</h1>
       <TodoForm onAddTodo={addTodo} isSaving={isSaving} />
 
@@ -253,12 +255,10 @@ function App() {
         sortField={sortField}
         setSortField={setSortField}
       />
-      {!errorMessage && (
-        <div>
+      {errorMessage && (
+        <div className={styles.errorWrapper}>
           <hr />
-          <p>
-            fdsffsdsfdfsdff dfcewfrweq ferwfwqwfgr ferwq fewq fwqe{errorMessage}
-          </p>
+          <p className={styles.errorMessage}>{errorMessage}</p>
           <button type="button" onClick={() => setErrorMessage('')}>
             Dismiss Error Message
           </button>

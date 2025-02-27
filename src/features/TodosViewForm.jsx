@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { styled } from 'styled-components';
 
 function TodosViewForm({
   queryString,
@@ -25,8 +26,8 @@ function TodosViewForm({
   }
 
   return (
-    <form onSubmit={preventRefresh}>
-      <div>
+    <StyledForm onSubmit={preventRefresh}>
+      <div className="controlGroup">
         <label>
           Search todos:
           <input
@@ -40,7 +41,7 @@ function TodosViewForm({
           Clear
         </button>
       </div>
-      <div>
+      <div className="controlGroup">
         <label>
           Sort by
           <select
@@ -66,8 +67,18 @@ function TodosViewForm({
           </select>
         </label>
       </div>
-    </form>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  & > * {
+    margin: 0.5rem 0;
+  }
+  .controlGroup {
+    display: flex;
+    gap: 0.5rem;
+  }
+`;
 
 export default TodosViewForm;

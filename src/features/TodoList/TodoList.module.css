@@ -1,0 +1,6 @@
+.todoList {
+  list-style: none;
+  width: 90vw;
+  max-width: 500px;
+  padding: 0;
+}
