@@ -61,7 +61,7 @@ function App() {
       }
     };
     fetchTodos();
-  }, [queryString, sortDirection, sortField]);
+  }, [queryString, sortDirection, sortField, encodeUrl]);
 
   //pessimistic
   const addTodo = async (newTodo) => {
@@ -253,10 +253,12 @@ function App() {
         sortField={sortField}
         setSortField={setSortField}
       />
-      {errorMessage && (
+      {!errorMessage && (
         <div>
           <hr />
-          <p>{errorMessage}</p>
+          <p>
+            fdsffsdsfdfsdff dfcewfrweq ferwfwqwfgr ferwq fewq fwqe{errorMessage}
+          </p>
           <button type="button" onClick={() => setErrorMessage('')}>
             Dismiss Error Message
           </button>
