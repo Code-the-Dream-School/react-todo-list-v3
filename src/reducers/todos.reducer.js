@@ -1,8 +1,11 @@
 const actions = {
   fetchTodos: 'fetchTodos',
   loadTodos: 'setTodos',
+  addTodo: 'add',
   updateTodo: 'update',
+  revertTodo: 'revert',
   completeTodo: 'complete',
+  startRequest: 'startRequest',
   endRequest: 'endRequest',
   setError: 'setError',
   clearError: 'clearError',
@@ -25,27 +28,75 @@ function reducer(state = initialState, action) {
     case actions.loadTodos:
       return {
         ...state,
-        todos: [...action.todos],
+        todoList: [
+          ...action.records.map((record) => {
+            const todo = {
+              id: record.id,
+              ...record.fields,
+            };
+            if (!record.fields.isCompleted) {
+              todo.isCompleted = false;
+            }
+            return todo;
+          }),
+        ],
+        isLoading: false,
       };
-    case actions.updateTodo:
+    case actions.addTodo: {
+      const savedTodo = {
+        id: action.records[0]['id'],
+        ...action.records[0].fields,
+      };
+      if (!action.records[0].fields.isCompleted) {
+        savedTodo.isCompleted = false;
+      }
       return {
         ...state,
-        isSaving: true,
+        todoList: [...state.todoList, savedTodo],
       };
-    case actions.completeTodo:
+    }
+    case actions.revertTodo:
+    case actions.updateTodo: {
+      const updatedTodos = state.todoList.map((todo) => {
+        if (todo.id === action.editedTodo.id) {
+          return { ...action.editedTodo };
+        }
+        return todo;
+      });
       return {
         ...state,
-        isSaving: true,
+        todoList: [...updatedTodos],
       };
+    }
+    case actions.completeTodo: {
+      const updatedTodos = state.todoList.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, isCompleted: true };
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        todoList: [...updatedTodos],
+      };
+    }
     case actions.endRequest:
       return {
         ...state,
+        isLoading: false,
         isSaving: false,
+      };
+    case actions.startRequest:
+      return {
+        ...state,
+        isSaving: true,
       };
     case actions.setError:
       return {
         ...state,
-        errorMessage: action.errorMessage,
+        errorMessage: action.error.message,
+        isLoading: false,
+        isSaving: false,
       };
     case actions.clearError:
       return {
