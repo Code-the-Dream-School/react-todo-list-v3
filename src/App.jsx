@@ -10,6 +10,7 @@ import {
 import TodosPage from './pages/TodosPage/TodosPage';
 import About from './pages/About/About';
 import Header from './shared/Header';
+import NotFound from './pages/NotFound/NotFound';
 
 const token = `Bearer ${import.meta.env.VITE_PAT}`;
 
@@ -203,6 +204,7 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {todoState.errorMessage && (
         <div className={styles.errorWrapper}>
