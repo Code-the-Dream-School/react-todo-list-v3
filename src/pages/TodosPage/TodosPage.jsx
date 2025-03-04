@@ -19,8 +19,7 @@ function TodosPage({
       <TodoForm onAddTodo={addTodo} isSaving={todoState.isSaving} />
 
       <TodoList
-        isLoading={todoState.isLoading}
-        todoList={todoState.todoList}
+        todoState={todoState}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
       />
