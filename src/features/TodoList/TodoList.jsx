@@ -23,9 +23,6 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
   const totalPages = Math.ceil(filteredTodoList.length / itemsPerPage);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
     if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
       navigate('/');
     }
