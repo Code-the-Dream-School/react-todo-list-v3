@@ -57,10 +57,13 @@ function App() {
   }, [queryString, sortDirection, sortField, encodeUrl]);
 
   useEffect(() => {
+    console.dir(location);
     if (location.pathname === '/') {
       setTitle('Todo List');
-    } else {
+    } else if (location.pathname === '/about') {
       setTitle('About');
+    } else {
+      setTitle('Not Found');
     }
   }, [location]);
   //pessimistic
