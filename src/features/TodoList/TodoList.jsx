@@ -3,11 +3,11 @@ import { useSearchParams, useNavigate } from 'react-router';
 import TodoListItem from './TodoListItem';
 import styles from './TodoList.module.css';
 
-function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
+function TodoList({ todoState, onCompleteTodo, onUpdateTodo }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const filteredTodoList = todoList.filter(
+  const filteredTodoList = todoState.todoList.filter(
     (todo) => todo.isCompleted === false
   );
 
@@ -23,10 +23,12 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
   const totalPages = Math.ceil(filteredTodoList.length / itemsPerPage);
 
   useEffect(() => {
-    if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
-      navigate('/');
+    if (totalPages > 0) {
+      if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
+        navigate('/');
+      }
     }
-  }, [currentPage, totalPages, navigate, isLoading]);
+  }, [currentPage, totalPages, navigate]);
 
   const handlePreviousPage = () => {
     setSearchParams({ page: Math.max(currentPage - 1, 1) });
@@ -40,7 +42,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
     <>
       {filteredTodoList.length === 0 ? (
         <>
-          {isLoading ? (
+          {todoState.isLoading ? (
             <p>Todo list loading...</p>
           ) : (
             <p>Add a todo above to get started</p>
