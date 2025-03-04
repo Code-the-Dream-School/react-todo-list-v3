@@ -23,10 +23,13 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, isLoading }) {
   const totalPages = Math.ceil(filteredTodoList.length / itemsPerPage);
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
     if (isNaN(currentPage) || currentPage < 1 || currentPage > totalPages) {
       navigate('/');
     }
-  }, [currentPage, totalPages, navigate]);
+  }, [currentPage, totalPages, navigate, isLoading]);
 
   const handlePreviousPage = () => {
     setSearchParams({ page: Math.max(currentPage - 1, 1) });
