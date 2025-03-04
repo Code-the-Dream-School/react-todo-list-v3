@@ -57,7 +57,6 @@ function App() {
   }, [queryString, sortDirection, sortField, encodeUrl]);
 
   useEffect(() => {
-    console.dir(location);
     if (location.pathname === '/') {
       setTitle('Todo List');
     } else if (location.pathname === '/about') {
