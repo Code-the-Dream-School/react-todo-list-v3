@@ -5,7 +5,8 @@ import TodoForm from './TodoForm';
 function App() {
   const [todoList, setTodoList] = useState([]);
 
-  function addTodo(newTodo) {
+  function addTodo(title) {
+    const newTodo = { title, id: Date.now(), isCompleted: false };
     setTodoList([...todoList, newTodo]);
   }
 

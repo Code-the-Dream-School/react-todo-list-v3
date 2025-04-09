@@ -6,8 +6,7 @@ function TodoForm({ onAddTodo }) {
 
   function handleAddTodo(event) {
     event.preventDefault();
-    const newTodo = { title: workingTodo, id: Date.now(), isCompleted: false };
-    onAddTodo(newTodo);
+    onAddTodo(workingTodo);
     setWorkingTodo('');
     todoTitleInput.current.focus();
   }
