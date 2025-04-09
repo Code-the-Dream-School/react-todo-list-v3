@@ -23,8 +23,7 @@ function TodoForm({ onAddTodo, isSaving }) {
 
   function handleAddTodo(event) {
     event.preventDefault();
-    const newTodo = { title: workingTodo, isCompleted: false };
-    onAddTodo(newTodo);
+    onAddTodo(workingTodo);
     setWorkingTodo('');
     todoTitleInput.current.focus();
   }
