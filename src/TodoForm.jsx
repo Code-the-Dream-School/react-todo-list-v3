@@ -4,8 +4,7 @@ function TodoForm({onAddTodo}){
     event.preventDefault();
     const title = event.target.title.value;
     event.target.title.value = "";
-    const newTodo = {title, id: Date.now()};
-    onAddTodo(newTodo);
+    onAddTodo(title);
   }
   return(
     <form onSubmit={handleAddTodo}>
