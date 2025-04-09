@@ -66,7 +66,8 @@ function App() {
   }, [queryString, sortDirection, sortField, encodeUrl]);
 
   //pessimistic
-  const addTodo = async (newTodo) => {
+  const addTodo = async (title) => {
+    const newTodo = { title, id: Date.now(), isCompleted: false };
     const payload = {
       records: [
         {
