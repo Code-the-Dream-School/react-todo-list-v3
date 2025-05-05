@@ -147,6 +147,7 @@ function App() {
     }
   };
 
+  //optimistic UI
   //optimistic - uses catch to revert
   const completeTodo = async (id) => {
     const [originalTodo] = todoState.todoList.filter((todo) => todo.id === id);
