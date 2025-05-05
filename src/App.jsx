@@ -145,21 +145,6 @@ function App() {
       if (!resp.ok) {
         throw new Error(resp.error);
       }
-      const { records } = await resp.json();
-      const updatedTodo = {
-        id: records[0]['id'],
-        ...records[0].fields,
-      };
-      if (!records[0].fields.isCompleted) {
-        updatedTodo.isCompleted = false;
-      }
-      const updatedTodos = todoList.map((todo) => {
-        if (todo.id === updatedTodo.id) {
-          return { ...updatedTodo };
-        }
-        return todo;
-      });
-      setTodoList([...updatedTodos]);
     } catch (error) {
       console.dir(error);
       setErrorMessage(`${error.message}. Reverting todo...`);
@@ -173,6 +158,7 @@ function App() {
     }
   };
 
+  //optimistic UI
   const completeTodo = async (id) => {
     const [originalTodo] = todoList.filter((todo) => todo.id === id);
     const updatedTodos = todoList.map((todo) => {
@@ -200,27 +186,11 @@ function App() {
       },
       body: JSON.stringify(payload),
     };
-
     try {
       const resp = await fetch(encodeUrl(), options);
       if (!resp.ok) {
         throw new Error(resp.error);
       }
-      const { records } = await resp.json();
-      const updatedTodo = {
-        id: records[0]['id'],
-        ...records[0].fields,
-      };
-      if (!records[0].fields.isCompleted) {
-        updatedTodo.isCompleted = false;
-      }
-      const updatedTodos = todoList.map((todo) => {
-        if (todo.id === updatedTodo.id) {
-          return { ...updatedTodo };
-        }
-        return todo;
-      });
-      setTodoList([...updatedTodos]);
     } catch (error) {
       console.dir(error);
       setErrorMessage(`${error.message}. Reverting todo...`);
