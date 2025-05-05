@@ -141,6 +141,7 @@ function App() {
     }
   };
 
+  //optimistic UI
   const completeTodo = async (id) => {
     const [originalTodo] = todoList.filter((todo) => todo.id === id);
     const updatedTodos = todoList.map((todo) => {
