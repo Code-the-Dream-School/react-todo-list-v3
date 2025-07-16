@@ -1,7 +1,19 @@
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 
-function Header({ title }) {
+function Header() {
+  const [title, setTitle] = useState('Todo List');
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setTitle('Todo List');
+    } else if (location.pathname === '/about') {
+      setTitle('About');
+    } else {
+      setTitle('Not Found');
+    }
+  }, [location]);
   return (
     <header className={styles.header}>
       <h1>{title}</h1>
